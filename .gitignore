@@ -1,0 +1,12 @@
+# Minecraft runtime files
+world/
+world_nether/
+world_the_end/
+logs/
+crash-reports/
+cache/
+libraries/
+versions/
+*.jar
+eula.txt
+.config/

@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: minecraft-server
+    env: docker
+    plan: free
+    region: oregon # or ohio, frankfurt, singapore
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: RAM_MB
+        value: 400M
+      - key: GDRIVE_REMOTE_NAME
+        value: gdrive
+      - key: RCLONE_CONFIG_BASE64
+        sync: false # Set in Render dashboard
+      - key: PLAYIT_SECRET_KEY
+        sync: false # Set in Render dashboard
