@@ -10,3 +10,5 @@ versions/
 *.jar
 eula.txt
 .config/
+tools/
+*.zip
