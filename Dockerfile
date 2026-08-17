@@ -1,4 +1,4 @@
-# Build Stage: Download PaperMC and Tools
+# Build Stage: Download High-Performance Server and Tools
 FROM eclipse-temurin:21-jre-jammy
 
 # Install required dependencies
@@ -23,16 +23,10 @@ RUN curl -SsL https://playit-cloud.github.io/ppa/key.gpg | gpg --dearmor | tee /
 
 WORKDIR /server
 
-# Download latest stable PaperMC jar for 1.20.4 or 1.20.6 (1.20.4 is optimal for low memory)
-ARG MC_VERSION=1.20.4
-RUN PROJECT="paper" && \
-    VERSION=${MC_VERSION} && \
-    BUILDS_URL="https://api.papermc.io/v2/projects/${PROJECT}/versions/${VERSION}/builds" && \
-    BUILD=$(curl -s $BUILDS_URL | jq '.builds[-1].build') && \
-    JAR_NAME="${PROJECT}-${VERSION}-${BUILD}.jar" && \
-    DOWNLOAD_URL="https://api.papermc.io/v2/projects/${PROJECT}/versions/${VERSION}/builds/${BUILD}/downloads/${JAR_NAME}" && \
-    echo "Downloading PaperMC from $DOWNLOAD_URL" && \
-    curl -o /server/server.jar $DOWNLOAD_URL
+# Download Purpur 1.20.4 (Optimized high-performance PaperMC fork)
+RUN echo "Downloading Purpur Server..." && \
+    curl -sSL -H "User-Agent: Mozilla/5.0" -o /server/server.jar "https://api.purpurmc.org/v2/purpur/1.20.4/latest/download" && \
+    ls -lh /server/server.jar
 
 # Copy configurations & scripts
 COPY server.properties /server/server.properties
